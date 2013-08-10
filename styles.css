@@ -1,0 +1,29 @@
+/* 
+    Document   : styles
+    Created on : Aug 9, 2013, 1:11:48 AM
+    Author     : elefher
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+root { 
+    display: block;
+}
+.block{display:block;}
+.none{display:none;}
+
+label{display:block;}
+label input{float:left;}
+form label{padding:20px;}
+.true{
+    background: url('images/true_icon.png') no-repeat transparent;
+    float:left;
+    height: 25px;
+    width: 25px;
+}
+.false{
+    background: url('images/false_icon.png') no-repeat transparent;
+    float:left;
+    height: 25px;
+    width: 25px;
+}
