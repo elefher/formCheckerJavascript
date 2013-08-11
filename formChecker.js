@@ -5,6 +5,7 @@ window.onload = function() {
         forms: document.getElementsByTagName("form"),
         classNameErrorInput: null, //user can set class name for error(inputs)
         classNameErrorRadio: null, //user can set class name for error(Radio button)
+        classNameErrorPass: null, //user can set class name for error(input password)
         inputsLength: function() {
             return this.inputs.length;
         },
@@ -143,6 +144,36 @@ window.onload = function() {
             div.innerHTML = note;
             that.appendChild(div);
         },
+        inputsMatch: function(param1, param2,setText) {//check if specific inputs match
+            var val1 = param1.value;//get values of inputs
+            var val2 = param2.value;
+            
+            //set vars for display
+            var trueText=setText["true"]==""?"Passwords match":setText["true"];
+            var falseText=setText["false"]==""?"Your password and confirmation password do not match":setText["false"];
+            //end display vars
+            
+            var className = this.classNameErrorPass == null ? "errorMatch" : this.classNameErrorPass;
+            if (val2 != "") {
+                if (val1 == val2) {
+                    if (param1.parentNode.lastChild.className == className) {
+                        var errorChild = param1.parentNode.lastChild;
+                        errorChild.parentNode.removeChild(errorChild);
+                    }
+                    if (param1.parentNode.lastChild.className != "confirm-true") {
+                        this.createDiv(param1.parentNode, "div", "confirm-true", trueText);
+                    }
+                } else {
+                     if (param1.parentNode.lastChild.className == "confirm-true") {
+                        var errorChild = param1.parentNode.lastChild;
+                        errorChild.parentNode.removeChild(errorChild);
+                    }
+                    if (param1.parentNode.lastChild.className != className) {
+                        this.createDiv(param1.parentNode, "div", className, falseText);
+                    }
+                }
+            }
+        },
         realTimeAutoCorrect: function(node) {
             var emailPattern = /^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/,
                     emailRegExp = new RegExp(emailPattern);
@@ -169,6 +200,28 @@ window.onload = function() {
     form.classNameErrorInput = "inputError";
     form.classNameErrorRadio = "radioError";
     //end settings
+
+    //checking password
+    var getAllForm = form.inputs;//get all inputs of form
+    var pass = getAllForm.pass;//get input with name pass
+    var passCon = getAllForm.con_pass;//get input with name con_pass
+    
+    form.classNameErrorPass="pass-error";//optional attribute
+    
+    //set text to display
+    //if you want the default text then leave blank the values
+    setDisplayTrue="good!";
+    setDisplayFalse="wrong!";
+    //end optional display
+    
+    passCon.addEventListener("keyup", function() {
+        form.inputsMatch(this, pass,{"true":setDisplayTrue,"false":setDisplayFalse});
+        
+        //example with blank values for default output echo
+        //  form.inputsMatch(this, pass,{"true":"","false":""});
+    });
+    //end check password
+
     form.forms[0].addEventListener("keyup", function(e) {
         //get real node
         //get this input
