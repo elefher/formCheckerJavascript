@@ -12,8 +12,11 @@ root {
 .block{display:block;}
 .none{display:none;}
 
+form{background: none repeat scroll 0 0 grey;border-radius: 3px 3px 3px 3px;box-shadow: 3px 3px #000000;display: block;padding: 10px 0;width: 450px;}
+form input[type="submit"]{border: 0 none;border-radius: 3px 3px 3px 3px;box-shadow: 2px 2px;display: block;font-weight: bolder;margin: 0 auto;width: 220px;}
+
 label{display:block;}
-label input{float:left;}
+label input{ background: none repeat scroll 0 0 rgba(0, 0, 0, 0.6);border: 1px solid black;border-radius: 3px 3px 3px 3px;box-shadow: 2px 2px black;color: white;float: left;font-weight: bold;height: 30px;}
 form label{padding:20px;}
 .true{
     background: url('images/true_icon.png') no-repeat transparent;
